@@ -17,7 +17,8 @@ const useFetch = (callback) => {
   useEffect(() => {
     const apiFetch = async (url, options) => {
       try {
-        const response = await fetch(url);
+        const newURL = options?.queryParams?.order ? `${url}?order=${options.queryParams.order.replace(/\s+/g, '-')}` : url;
+        const response = await fetch(newURL);
         if (!response.ok) throw new Error(response.statusText);
 
         const data = await response.json();
