@@ -3,7 +3,7 @@ import useFetch from './hooks/useFetch';
 
 const App = () => {
   const [{ ditto, pikachu, charmander }, isLoading] = useFetch((fetch) => ({
-    ditto: fetch('https://pokeapi.co/api/v2/pokemon/ditto', { queryParams: { order: 'label ASC' } }),
+    ditto: fetch('https://pokeapi.co/api/v2/pokemon/ditto'),
     pikachu: fetch('https://pokeapi.co/api/v2/pokemon/pikachu'),
     charmander: fetch('https://pokeapi.co/api/v2/pokemon/charmander')
   }));
