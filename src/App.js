@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import useFetch from './hooks/useFetch';
 
-function App() {
+const App = () => {
+  const [{ ditto, pikachu, charmander }, isLoading] = useFetch((fetch) => ({
+    ditto: fetch('https://pokeapi.co/api/v2/pokemon/ditto'),
+    pikachu: fetch('https://pokeapi.co/api/v2/pokemon/pikachu'),
+    charmander: fetch('https://pokeapi.co/api/v2/pokemon/charmander')
+  }));
+
+  console.log(ditto, pikachu, charmander)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Pokemon
     </div>
   );
-}
+};
 
 export default App;
