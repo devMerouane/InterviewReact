@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { fetching } from '../state'
 
 const useFetch = (callback) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const boundFetching = bindActionCreators(fetching, dispatch);
 
   const handleObjectPromise = async (obj) => {
     let newObject = {};
     for (let element in obj) {
       newObject = { ...newObject, [element]: await obj[element] }
     }
-
+    boundFetching(newObject);
     setData(newObject);
     setIsLoading(false);
   }
