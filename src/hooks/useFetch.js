@@ -20,6 +20,7 @@ const useFetch = (callback) => {
   useEffect(() => {
     const apiFetch = async (url, options) => {
       try {
+        if(!url) throw new Error('url not provided');
         const newURL = options?.queryParams?.order ? `${url}?order=${options.queryParams.order.replace(/\s+/g, '-')}` : url;
         const response = await fetch(newURL);
         if (!response.ok) throw new Error(response.statusText);
