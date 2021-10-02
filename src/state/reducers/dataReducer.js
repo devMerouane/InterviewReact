@@ -1,13 +1,27 @@
+import { CHARMANDER_FETCHED, DITTO_FETCHED, PIKACHU_FETCHED } from '../action-creator';
+
 const initialState = {
-  data: undefined,
-}
+  ditto: {},
+  pikachu: {},
+  charmander: {}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCHING':
+    case DITTO_FETCHED:
       return {
         ...state,
-        data: action.payload
+        ditto: action.payload
+      }
+    case PIKACHU_FETCHED:
+      return {
+        ...state,
+        pikachu: action.payload
+      }
+    case CHARMANDER_FETCHED:
+      return {
+        ...state,
+        charmander: action.payload,
       }
     default:
       return state
