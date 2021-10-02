@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
-import { useDispatch } from 'react-redux';
-import { fetching } from '../state'
+import { useDispatch, useSelector } from 'react-redux';
+import { charmander, pikachu, ditto } from '../state'
 
 const useFetch = (callback) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState({});
+  const data = useSelector(state => state.data);
   const dispatch = useDispatch();
-  const boundFetching = bindActionCreators(fetching, dispatch);
+  const boundFetching = bindActionCreators({ charmander, pikachu, ditto }, dispatch);
 
   const handleObjectPromise = async (obj) => {
-    let newObject = {};
     for (let element in obj) {
-      newObject = { ...newObject, [element]: await obj[element] }
+      const newObject = { [element]: await obj[element] }
+      boundFetching[element](newObject[element])
     }
-    boundFetching(newObject);
-    setData(newObject);
     setIsLoading(false);
   }
 
