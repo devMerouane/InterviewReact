@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { charmander, pikachu, ditto } from '../state'
+import { setLocalStorage } from '../utils/localstorage';
 
 const useFetch = (callback) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +14,7 @@ const useFetch = (callback) => {
     for (let element in obj) {
       const newObject = { [element]: await obj[element] }
       boundFetching[element](newObject[element])
+      setLocalStorage(element, newObject);
     }
     setIsLoading(false);
   }
