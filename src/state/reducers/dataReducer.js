@@ -1,9 +1,10 @@
 import { CHARMANDER_FETCHED, DITTO_FETCHED, PIKACHU_FETCHED } from '../action-creator';
+import { getLocalStorage } from '../../utils/localstorage';
 
 const initialState = {
-  ditto: {},
-  pikachu: {},
-  charmander: {}
+  ditto: getLocalStorage('ditto') || undefined,
+  pikachu: getLocalStorage('pikachu') || undefined,
+  charmander: getLocalStorage('charmander') || undefined,
 };
 
 const reducer = (state = initialState, action) => {
