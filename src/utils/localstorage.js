@@ -10,12 +10,17 @@ export const getLocalStorage = (key) => {
   }
 }
 export const setLocalStorage = (key, data) => {
+  const compressedData = lzwcompress.pack(data);
   try {
-    const space = localStorage['ditto'].length;
-    console.log(space)
-    const compressedData = lzwcompress.pack(data);
     localStorage.setItem(key, JSON.stringify(compressedData))
   } catch (error) {
-    console.log(error)
+    if (error === DOMException.QUOTA_EXCEEDED_ERR) {
+      for (const x in localStorage) {
+        if (localStorage[x].length > compressedData.length) {
+          localStorage.removeItem(x);
+          localStorage.setItem(key, JSON.stringify(compressedData));
+        }
+      }
+    }
   }
 }
