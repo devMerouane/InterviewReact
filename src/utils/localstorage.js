@@ -4,7 +4,7 @@ export const getLocalStorage = (key) => {
   try {
     const data = JSON.parse(localStorage.getItem(key));
     const uncompressedData = lzwcompress.unpack(data);
-    return uncompressedData[key];
+    return uncompressedData;
   } catch (error) {
     console.log(error)
   }
